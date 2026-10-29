@@ -21,41 +21,40 @@ Se pueden crear y renombrar franquicias y sucursales; crear, consultar, renombra
 | `GET` | `/api/v1/products/{id}` | Consultar producto por ID |
 | `GET` | `/api/v1/franchises/{franchiseId}/products/highest-stock` | Consultar productos con mayor stock por sucursal |
 
+## Probar la API
+
+La colección de Postman está en [`src/main/resources/doc/EPAM.postman_collection.json`](src/main/resources/doc/EPAM.postman_collection.json). Impórtala en Postman para encontrar solicitudes de ejemplo dirigidas a `https://test-api-franquicia.onrender.com`. Algunos requests usan IDs fijos; ajústalos si los recursos de tu despliegue tienen otros identificadores.
+
+También está disponible Swagger UI en `/swagger-ui/index.html` y la especificación OpenAPI en `/v3/api-docs`. Sustituye el host por el de tu despliegue; en local, por ejemplo, usa `https://test-api-franquicia.onrender.com/swagger-ui/index.html#/`.
+
 ## Ejecución
 
-**Requisitos:** Docker y una instancia de MySQL accesible, con la base de datos `franchise_db` creada. El proyecto no incluye `docker-compose`; el `Dockerfile` construye la aplicación, no MySQL.
+**Requisitos:** Docker y Docker Compose para el arranque en contenedores, o Java 21 y una instancia de MySQL accesible para ejecución local. El archivo `compose.yml` define MySQL y la API; el `Dockerfile` construye la aplicación.
 
 ### Docker
 
-En PowerShell, configura la conexión a MySQL. Para MySQL instalado en el equipo, Docker Desktop puede acceder mediante `host.docker.internal`; ajusta la URL si la base de datos está en otro host.
+Desde la carpeta del proyecto, arranca MySQL y la API con:
 
 ```powershell
-$env:DB_URL = "jdbc:mysql://host.docker.internal:3306/franchise_db"
-$env:DB_USERNAME = "franchise_user"
-$env:DB_PASSWORD = Read-Host "DB_PASSWORD"
-
-docker build -t test-api .
-docker run --rm -d --name test-api -p 8080:8080 `
-  -e "DB_URL=$env:DB_URL" `
-  -e "DB_USERNAME=$env:DB_USERNAME" `
-  -e "DB_PASSWORD=$env:DB_PASSWORD" `
-  test-api
+docker compose up --build -d
 ```
 
-Comprueba que el contenedor está activo y que la API responde:
+Compose configura la conexión de la API a MySQL mediante `DB_USERNAME` y `DB_PASSWORD`; puede recibirlas del entorno o del archivo `.env` local. El script `database/init/001_schema.sql` inicializa el esquema al crear MySQL con un volumen vacío. No se vuelve a ejecutar automáticamente sobre un volumen ya inicializado. No elimines el volumen `mysql_data` si quieres conservar sus datos.
+
+Comprueba el estado de los servicios y que la API responde:
 
 ```powershell
-docker ps --filter "name=^/test-api$"
+docker compose ps
 curl.exe -i http://localhost:8080/api/v1/products/1
 ```
 
-La consulta devuelve `200` si existe el producto o `404` si no existe. Detén y elimina el contenedor con:
+La consulta devuelve `200` si existe el producto o `404` si no existe. Detén los servicios sin borrar el volumen con:
 
 ```powershell
-docker stop test-api
+docker compose down
 ```
 
-Las credenciales se proporcionan mediante `DB_URL`, `DB_USERNAME` y `DB_PASSWORD`; no las guardes en el repositorio. La imagen expone el puerto `8080`.
+No guardes credenciales reales en el repositorio. La API expone el puerto `8080`.
 
 ### Ejecución local
 
