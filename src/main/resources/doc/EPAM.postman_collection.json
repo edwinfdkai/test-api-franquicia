@@ -1,0 +1,318 @@
+{
+  "info": {
+    "_postman_id": "bb653426-a5dd-4443-9b83-4d9465944e6e",
+    "name": "EPAM",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "16893691"
+  },
+  "item": [
+    {
+      "name": "Crear Franquicia",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Franquicia Demo\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://test-api-franquicia.onrender.com/api/v1/franchises",
+          "protocol": "https",
+          "host": [
+            "test-api-franquicia",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "franchises"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear Sucursal",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Sucursal Oriente\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://test-api-franquicia.onrender.com/api/v1/franchises/1/branches",
+          "protocol": "https",
+          "host": [
+            "test-api-franquicia",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "franchises",
+            "1",
+            "branches"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Crear producto",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Usb\",\r\n  \"stock\": 100\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://test-api-franquicia.onrender.com/api/v1/branches/1/products",
+          "protocol": "https",
+          "host": [
+            "test-api-franquicia",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "branches",
+            "1",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Renombrar Sucursal",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Sucursal Norte\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://test-api-franquicia.onrender.com/api/v1/branches/4",
+          "protocol": "https",
+          "host": [
+            "test-api-franquicia",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "branches",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Renombrar Franquicia",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Franquicia Cali\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://test-api-franquicia.onrender.com/api/v1/franchises/1",
+          "protocol": "https",
+          "host": [
+            "test-api-franquicia",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "franchises",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actualizar Stock",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"stock\": 50\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://test-api-franquicia.onrender.com/api/v1/products/7/stock",
+          "protocol": "https",
+          "host": [
+            "test-api-franquicia",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "products",
+            "7",
+            "stock"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Renombrar producto",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Teclado Asus\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://test-api-franquicia.onrender.com/api/v1/products/1",
+          "protocol": "https",
+          "host": [
+            "test-api-franquicia",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "products",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar Producto",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Teclado Asus\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://test-api-franquicia.onrender.com/api/v1/branches/1/products/5",
+          "protocol": "https",
+          "host": [
+            "test-api-franquicia",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "branches",
+            "1",
+            "products",
+            "5"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Consultar Mayor stock",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://test-api-franquicia.onrender.com/api/v1/franchises/1/products/highest-stock",
+          "protocol": "https",
+          "host": [
+            "test-api-franquicia",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "franchises",
+            "1",
+            "products",
+            "highest-stock"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Consultar producto",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://test-api-franquicia.onrender.com/api/v1/products/5",
+          "protocol": "https",
+          "host": [
+            "test-api-franquicia",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "products",
+            "5"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
