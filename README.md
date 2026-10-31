@@ -23,53 +23,39 @@ Se pueden crear y renombrar franquicias y sucursales; crear, consultar, renombra
 
 ## Probar la API
 
-La colección de Postman está en [`src/main/resources/doc/EPAM.postman_collection.json`](src/main/resources/doc/EPAM.postman_collection.json). Impórtala en Postman para encontrar solicitudes de ejemplo dirigidas a `https://test-api-franquicia.onrender.com`. Algunos requests usan IDs fijos; ajústalos si los recursos de tu despliegue tienen otros identificadores.
+La colección de Postman está en [`src/main/resources/doc/EPAM.postman_collection.json`](src/main/resources/doc/EPAM.postman_collection.json). Impórtala en Postman para probar los endpoints; sus solicitudes de ejemplo apuntan a la demo online. Algunos requests usan IDs fijos, así que ajústalos si los recursos de tu despliegue tienen otros identificadores.
 
-También está disponible Swagger UI en `/swagger-ui/index.html` y la especificación OpenAPI en `/v3/api-docs`. Sustituye el host por el de tu despliegue; en local, por ejemplo, usa `https://test-api-franquicia.onrender.com/swagger-ui/index.html#/`.
+## Formas de ejecución
 
-## Ejecución
+### A) Demo online
 
-**Requisitos:** Docker y Docker Compose para el arranque en contenedores, o Java 21 y una instancia de MySQL accesible para ejecución local. El archivo `compose.yml` define MySQL y la API; el `Dockerfile` construye la aplicación.
+Abre [Swagger UI](https://test-api-franquicia.onrender.com/swagger-ui/index.html) para explorar y probar la API. La demo utiliza el plan gratuito de Render, por lo que, si estuvo inactiva, la primera respuesta puede tardar mientras el servicio vuelve a estar disponible.
 
-### Docker
+La especificación OpenAPI está disponible en `/v3/api-docs`. También puedes importar en Postman la colección ubicada en [`src/main/resources/doc/EPAM.postman_collection.json`](src/main/resources/doc/EPAM.postman_collection.json).
 
-Desde la carpeta del proyecto, arranca MySQL y la API con:
+### B) Ejecución local
 
-```powershell
-docker compose up --build -d
+**Requisitos:** Docker Desktop instalado y en ejecución, con Docker Compose disponible.
+
+Clona el repositorio y levanta la API junto con MySQL:
+
+```text
+git clone https://github.com/edwinfdkai/test-api-franquicia.git
+cd test-api-franquicia
+docker compose up --build
 ```
 
-Compose configura la conexión de la API a MySQL mediante `DB_USERNAME` y `DB_PASSWORD`; puede recibirlas del entorno o del archivo `.env` local. El script `database/init/001_schema.sql` inicializa el esquema al crear MySQL con un volumen vacío. No se vuelve a ejecutar automáticamente sobre un volumen ya inicializado. No elimines el volumen `mysql_data` si quieres conservar sus datos.
+Docker Compose levanta la API y una base MySQL independiente en tu equipo. No necesitas una cuenta de Aiven ni configurar credenciales externas para ejecutar el proyecto localmente. La conexión utiliza valores predeterminados exclusivos para desarrollo, que también pueden sobrescribirse mediante las variables de entorno `DB_USERNAME` y `DB_PASSWORD`.
 
-Comprueba el estado de los servicios y que la API responde:
+Swagger queda disponible en [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html). La especificación OpenAPI está en `http://localhost:8080/v3/api-docs`.
 
-```powershell
-docker compose ps
-curl.exe -i http://localhost:8080/api/v1/products/1
-```
-
-La consulta devuelve `200` si existe el producto o `404` si no existe. Detén los servicios sin borrar el volumen con:
+Para detener los contenedores, ejecuta desde la carpeta del proyecto:
 
 ```powershell
 docker compose down
 ```
 
-No guardes credenciales reales en el repositorio. La API expone el puerto `8080`.
-
-### Ejecución local
-
-Con **Java 21** y una instancia MySQL accesible, configura las mismas variables. Para MySQL local, la URL predeterminada es `jdbc:mysql://localhost:3306/franchise_db`.
-
-```powershell
-$env:DB_URL = "jdbc:mysql://localhost:3306/franchise_db"
-$env:DB_USERNAME = "franchise_user"
-$env:DB_PASSWORD = Read-Host "DB_PASSWORD"
-
-.\mvnw.cmd clean package
-.\mvnw.cmd spring-boot:run
-```
-
-La aplicación inicia en `http://localhost:8080`; detenla con `Ctrl+C`. El perfil predeterminado es `dev` y actualiza el esquema mediante Hibernate.
+La base de datos se conserva en el volumen `mysql_data` aunque detengas los contenedores. No uses `docker compose down -v` salvo que quieras eliminar también la base de datos local y sus datos. El script `database/init/001_schema.sql` inicializa el esquema al crear un volumen vacío; no se ejecuta de nuevo automáticamente sobre un volumen ya inicializado.
 
 ## Pruebas
 

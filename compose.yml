@@ -5,8 +5,8 @@ services:
     container_name: test-api-mysql
     environment:
       MYSQL_DATABASE: franchise_db
-      MYSQL_USER: franchise_user
-      MYSQL_PASSWORD: franchise_password
+      MYSQL_USER: ${DB_USERNAME:-franchise_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-franchise_password}
       MYSQL_ROOT_PASSWORD: root_password
     ports:
       - "3306:3306"
