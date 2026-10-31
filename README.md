@@ -29,7 +29,7 @@ La colección de Postman está en [`src/main/resources/doc/EPAM.postman_collecti
 
 ### A) Demo online
 
-Abre [Swagger UI](https://test-api-franquicia.onrender.com/swagger-ui/index.html) para explorar y probar la API. La demo utiliza el plan gratuito de Render, por lo que, si estuvo inactiva, la primera respuesta puede tardar mientras el servicio vuelve a estar disponible.
+Abre [Swagger UI](https://test-api-franquicia.onrender.com/swagger-ui/index.html) para explorar y probar la API. La demo utiliza el plan gratuito de Render, por lo que, si estuvo inactiva, la primera respuesta puede tardar entre 2 y 4 minutos mientras el servicio vuelve a estar disponible.
 
 La especificación OpenAPI está disponible en `/v3/api-docs`. También puedes importar en Postman la colección ubicada en [`src/main/resources/doc/EPAM.postman_collection.json`](src/main/resources/doc/EPAM.postman_collection.json).
 
